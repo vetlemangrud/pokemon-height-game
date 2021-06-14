@@ -62,12 +62,12 @@ function guessWrong(pokemon1, pokemon2){
             {#await secondPokemon()}
             <LoadingScreen></LoadingScreen>
             {:then pokemon2}
-            <div id="cards" class="row">
-                <p class="column">Is</p>
-                <PokemonCard pokemon={pokemon1} class="column"></PokemonCard>
-                <p class="column">Taller than</p>
-                <PokemonCard pokemon={pokemon2} class="column"></PokemonCard>
-                <p class="column">?</p>
+            <div id="cards">
+                <p>Is</p>
+                <PokemonCard pokemon={pokemon1}></PokemonCard>
+                <p>Taller than</p>
+                <PokemonCard pokemon={pokemon2}></PokemonCard>
+                <p>?</p>
             </div>
             <div class="row">
                 <button on:click={pokemon1.height >= pokemon2.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}>Yes</button>

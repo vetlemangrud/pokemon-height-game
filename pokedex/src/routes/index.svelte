@@ -1,4 +1,5 @@
 <script>
+    import "../stylesheet.css";
     import StartScreen from "$lib/StartScreen.svelte";
     import GameScreen from "$lib/GameScreen.svelte";
     import GameOverScreen from "$lib/GameOverScreen.svelte";

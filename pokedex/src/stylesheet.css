@@ -1,0 +1,42 @@
+* {
+    font-family: 'Roboto', sans-serif; 
+    
+}
+
+body {
+    color: #E6E6E6;  
+    background-color: #297373;
+}
+
+h1 {
+    margin: auto;
+    width: fit-content;
+}
+
+.pokemonCard{
+    border: 1px solid black;
+    width: 300px;
+    padding: 10px;
+    height: 200px;
+}
+.pokemonCard p {
+    width: 150px;
+    margin: auto;
+}
+img {
+    width: 100px;
+    margin: auto;
+}
+#cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#cards p {
+    font-size: x-large;
+    width: 100px;
+    margin: auto;
+    text-align: center;
+    height: 100px;
+}
