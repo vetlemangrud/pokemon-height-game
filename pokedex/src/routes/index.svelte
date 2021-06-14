@@ -20,12 +20,17 @@
         state = "Start";
     }
 </script>
-<h1>Pokémon height game</h1>
-{#if state == "Start"}
-    <StartScreen on:startGame={startGame}></StartScreen>
-{:else if state == "Game"}
-    <GameScreen bind:score={score} on:endGame={endGame}></GameScreen>
-{:else if state == "GameOver"}
-    <GameOverScreen score={score} losingPokemon={losingPokemon} on:back={toMenu}></GameOverScreen>
-{/if}
+<header>
+    <h1>Pokémon Height Game</h1>
+</header>
+<main>
+    {#if state == "Start"}
+        <StartScreen on:startGame={startGame}></StartScreen>
+    {:else if state == "Game"}
+        <GameScreen bind:score={score} on:endGame={endGame}></GameScreen>
+    {:else if state == "GameOver"}
+        <GameOverScreen score={score} losingPokemon={losingPokemon} on:back={toMenu}></GameOverScreen>
+    {/if}
+</main>
+
 

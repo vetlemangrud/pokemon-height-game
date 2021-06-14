@@ -4,9 +4,21 @@
 }
 
 body {
-    color: #E6E6E6;  
-    background-color: #297373;
+    color: #333;  
+    background-color: #38618C;
+    margin: 0;
 }
+
+header {
+    background-color: #FFE74C;
+    padding: 30px;
+}
+
+main {
+    padding: 30px;
+    text-align: center;
+}
+
 
 h1 {
     margin: auto;
@@ -14,10 +26,12 @@ h1 {
 }
 
 .pokemonCard{
-    border: 1px solid black;
     width: 300px;
     padding: 10px;
-    height: 200px;
+    height: 250px;
+}
+.pokemonCard:hover {
+    background-color: #35A7FF;
 }
 .pokemonCard p {
     width: 150px;
@@ -30,8 +44,10 @@ img {
 #cards {
     display: flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 #cards p {
     font-size: x-large;
@@ -39,4 +55,22 @@ img {
     margin: auto;
     text-align: center;
     height: 100px;
+}
+
+.scoreCounter, button {
+    background-color: #FF5964;
+    width: 150px;
+    margin: auto;
+    margin-bottom: 20px;
+    font-size: larger;
+    color: white;
+    border: none;
+	padding: 20px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+button:hover {
+    background-color: #ff7a83;
 }

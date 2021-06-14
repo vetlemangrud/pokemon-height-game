@@ -14,9 +14,9 @@
     }
 </script>
 <h1>Game Over</h1>
+<p class="scoreCounter">Score: {score}</p>
 <div id=cards>
     <PokemonCard pokemon={pokemon1} showHeight={true}></PokemonCard>
     <PokemonCard pokemon={pokemon2} showHeight={true}></PokemonCard>
 </div>
-<p>Score: {score}</p>
 <button on:click={back}>Back</button>

@@ -52,7 +52,7 @@ function guessWrong(pokemon1, pokemon2){
 }
 
 </script>
-<p>Score: {score}</p>
+<p class="scoreCounter">Score: {score}</p>
 
     
     {#key score}
@@ -62,16 +62,10 @@ function guessWrong(pokemon1, pokemon2){
             {#await secondPokemon()}
             <LoadingScreen></LoadingScreen>
             {:then pokemon2}
+            <h1>Which is taller?</h1>
             <div id="cards">
-                <p>Is</p>
-                <PokemonCard pokemon={pokemon1}></PokemonCard>
-                <p>Taller than</p>
-                <PokemonCard pokemon={pokemon2}></PokemonCard>
-                <p>?</p>
-            </div>
-            <div class="row">
-                <button on:click={pokemon1.height >= pokemon2.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}>Yes</button>
-                <button on:click={pokemon1.height <= pokemon2.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}>No</button>
+                <PokemonCard pokemon={pokemon1} on:click={pokemon1.height >= pokemon2.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}></PokemonCard>
+                <PokemonCard pokemon={pokemon2} on:click={pokemon2.height >= pokemon1.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}></PokemonCard>
             </div>
             {:catch error}
                 Error loading pokemon api

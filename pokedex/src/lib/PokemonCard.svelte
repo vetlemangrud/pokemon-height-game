@@ -7,7 +7,7 @@
     }
 </script>
 
-<div class="pokemonCard">
+<div class="pokemonCard" on:click>
         <h1>{capitalizeFirstLetter(pokemon.name)}</h1>
         <img src="{pokemon.sprites.front_default}" alt="{pokemon.name}">
         {#if showHeight}
