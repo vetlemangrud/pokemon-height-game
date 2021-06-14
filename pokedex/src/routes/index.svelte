@@ -6,12 +6,15 @@
     function startGame() {
         state = "Game";
     }
+    function endGame(){
+        state = "Start"
+    }
 </script>
 
 {#if state == "Start"}
     <StartScreen on:startGame={startGame}></StartScreen>
 {:else if state == "Game"}
-    <GameScreen></GameScreen>
+    <GameScreen on:endGame={endGame}></GameScreen>
 {/if}
 
 

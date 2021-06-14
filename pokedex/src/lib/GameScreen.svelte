@@ -1,6 +1,9 @@
 <script>
 import PokemonCard from "./PokemonCard.svelte";
 import LoadingScreen from "./LoadingScreen.svelte";
+import { createEventDispatcher } from 'svelte';
+
+const dispatch = createEventDispatcher();
 
 let score = 0;
 let pokemonOrder = [];
@@ -17,7 +20,6 @@ loadNext();
 
 function loadNext(){
     while (pokemon.length < score + 10) {
-        console.log(pokemon.length);
         pokemon.push((async p => {
         const res = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonOrder[p.length]);
 		const pokemon = await res.text();
@@ -36,19 +38,17 @@ function secondPokemon(){
     return pokemon[score + 1];
 }
 
-function guessYes(){
-    console.log(firstPokemon());
+function guessCorrect(evt){
     score++;
-    if (firstPokemon().heigth >= secondPokemon().height) {
-        score++;
-    }
     loadNext();
 }
-function guessNo(){
-    if (firstPokemon().heigth <= secondPokemon().height) {
-        score++;
+function guessWrong(){
+    if (typeof window !== 'undefined') {
+        if (score > localStorage.getItem('highscore')) {
+            localStorage.setItem('highscore', score);
+        }
     }
-    loadNext();
+    dispatch("endGame");
 }
 
 </script>
@@ -66,8 +66,8 @@ function guessNo(){
                 <PokemonCard pokemon={pokemon1}></PokemonCard>
                 taller than
                 <PokemonCard pokemon={pokemon2}></PokemonCard>?
-                <button on:click={guessYes}>Yes</button>
-                <button on:click={guessNo}>No</button>
+                <button on:click={pokemon1.height >= pokemon2.height ? guessCorrect : guessWrong}>Yes</button>
+                <button on:click={pokemon1.height <= pokemon2.height ? guessCorrect : guessWrong}>No</button>
             {:catch error}
                 Error loading pokemon api
             {/await}
