@@ -5,7 +5,7 @@ import { createEventDispatcher } from 'svelte';
 
 const dispatch = createEventDispatcher();
 
-let score = 0;
+export let score = 0;
 let pokemonOrder = [];
 let pokemon = [];
 for (let i = 0; i < 898; i++) {
@@ -38,22 +38,22 @@ function secondPokemon(){
     return pokemon[score + 1];
 }
 
-function guessCorrect(evt){
+function guessCorrect(){
     score++;
     loadNext();
 }
-function guessWrong(){
+function guessWrong(pokemon1, pokemon2){
     if (typeof window !== 'undefined') {
         if (score > localStorage.getItem('highscore')) {
             localStorage.setItem('highscore', score);
         }
     }
-    dispatch("endGame");
+    dispatch("endGame", {pokemon1, pokemon2});
 }
 
 </script>
 <p>Score: {score}</p>
-<div id="cards">
+
     
     {#key score}
         {#await firstPokemon()}
@@ -62,12 +62,17 @@ function guessWrong(){
             {#await secondPokemon()}
             <LoadingScreen></LoadingScreen>
             {:then pokemon2}
-                Is
-                <PokemonCard pokemon={pokemon1}></PokemonCard>
-                taller than
-                <PokemonCard pokemon={pokemon2}></PokemonCard>?
-                <button on:click={pokemon1.height >= pokemon2.height ? guessCorrect : guessWrong}>Yes</button>
-                <button on:click={pokemon1.height <= pokemon2.height ? guessCorrect : guessWrong}>No</button>
+            <div id="cards" class="row">
+                <p class="column">Is</p>
+                <PokemonCard pokemon={pokemon1} class="column"></PokemonCard>
+                <p class="column">Taller than</p>
+                <PokemonCard pokemon={pokemon2} class="column"></PokemonCard>
+                <p class="column">?</p>
+            </div>
+            <div class="row">
+                <button on:click={pokemon1.height >= pokemon2.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}>Yes</button>
+                <button on:click={pokemon1.height <= pokemon2.height ? guessCorrect : (() => {guessWrong(pokemon1, pokemon2)})}>No</button>
+            </div>
             {:catch error}
                 Error loading pokemon api
             {/await}
@@ -76,5 +81,3 @@ function guessWrong(){
         {/await}
         
     {/key}
-    
-</div>

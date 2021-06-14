@@ -12,6 +12,5 @@
 		dispatch('startGame');
 	}
 </script>
-<h1>Pokémon height game</h1>
 <p>Highscore: {highscore}</p>
 <button on:click={startGame}>Start</button>
